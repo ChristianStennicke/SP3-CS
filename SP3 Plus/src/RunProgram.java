@@ -1,20 +1,35 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class RunProgram
 {
     User currentUser;
-    private Object media;
+
 
 
     public void startProgram() throws IOException {
+
         String name = TextUI.startMenu();
 
         currentUser = new User(name);
+        System.out.println(name);
+        try{
+            System.out.println(currentUser.getUserName());
+            if(currentUser.getUserName().equals(null))
+            {
+                System.exit(0);
+            }
+            else {
+                TextUI.mainMenu();
 
-        TextUI.mainMenu(currentUser);
+                TextUI.playOrSaveMedia();
+            }
+        }
+        catch (Exception e){
+            System.out.println(e);
 
-        TextUI.playOrSaveMedia(currentUser);
+        }
+
     }
 }
-
-

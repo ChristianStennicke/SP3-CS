@@ -6,13 +6,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
 public class UserLogin {
 
     static Scanner s = new Scanner(System.in);
     static String filename = "C:/Users/csten/OneDrive/Datamatikker/account.txt";
 
     public static String Userlogin() {
-
+String returnUsername;
         try {
             Path path = Paths.get(filename.toString());
             InputStream input = Files.newInputStream(path);
@@ -20,6 +28,7 @@ public class UserLogin {
             System.out.println("\nL O G I N \n ");
             System.out.print("Enter username : ");
             String username = s.nextLine();
+            returnUsername = username;
             System.out.print("Enter password : ");
             String password = s.nextLine();
             String _temp = null;
@@ -51,11 +60,12 @@ public class UserLogin {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        return null;
+        return returnUsername;
     }
 
-
-
-
-
 }
+
+
+
+
+

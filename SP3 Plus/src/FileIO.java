@@ -1,13 +1,11 @@
-import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
+import static java.nio.file.StandardOpenOption.APPEND;
 
 
 public class FileIO{
@@ -96,14 +94,159 @@ public class FileIO{
         }
         return movies;
     }
-        public static String getInput(){
+    public static String getInput(){
         Scanner input = new Scanner(System.in);
         String inputString = input.nextLine();
         return inputString;
     }
+    static String file = "C:/Users/csten/OneDrive/Datamatikker/watchedMedia.txt";
+    public static void playMovie() throws IOException {
+        try {
+            ArrayList<String[]> list = FileIO.readInfo();
+            System.out.println("Chose movie to watch");
+            String search = getInput();
+            for (int i = 0; i < list.size(); i++) {
 
-}
+                if (list.get(i)[0].equalsIgnoreCase(search)) {
 
+
+                    Path path = Paths.get(file);
+                    OutputStream output = new BufferedOutputStream(Files.newOutputStream(path, APPEND));
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output));
+                    writer.write(list.get(i)[0]);
+                    System.out.println(search + " is now playing");
+                    writer.close();
+                    output.close();
+                    break;
+                }
+            }
+        }
+        catch(Exception e)
+            {
+                System.out.println(e);
+
+            }
+        }
+
+
+    public static void saveMovie() throws IOException {
+        String file = "C:/Users/csten/OneDrive/Datamatikker/savedMedia.txt";
+        try {
+            ArrayList<String[]> list = FileIO.readInfo();
+            System.out.println("Chose movie to save");
+            String search = getInput();
+            for (int i = 0; i < list.size(); i++) {
+
+                if (list.get(i)[0].equalsIgnoreCase(search)) {
+
+
+                    Path path = Paths.get(file);
+                    OutputStream output = new BufferedOutputStream(Files.newOutputStream(path, APPEND));
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(output));
+                    writer.write(list.get(i)[0]);
+                    System.out.println(search + " is now saved");
+                    writer.close();
+                    output.close();
+                    break;
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+
+        }
+    }
+
+    public static void removeFromSaved() throws IOException {
+        String file = "C:/Users/csten/OneDrive/Datamatikker/savedMedia.txt";
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            ArrayList<String[]> list = FileIO.readInfo();
+            System.out.println("Chose movie to remove from saved list");
+            String search = getInput();
+            for (int i = 0; i < list.size(); i++) {
+
+                if (list.get(i)[0].equalsIgnoreCase(search)) {
+
+                    list.remove(i);
+                    writer.write(i);
+                    System.out.println(search + " has now been removed");
+                    writer.close();
+                    break;
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+
+        }
+    }
+
+        public static ArrayList<String[]> myWatchedMovies()
+        {
+            //for testing
+            String file = "C:/Users/csten/OneDrive/Datamatikker/watchedMedia.txt";
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                ArrayList<String[]> info = new ArrayList<>();
+                String[] movieInfo = new String[4];
+
+                String currentLine = reader.readLine();
+                while (currentLine != null) {
+                    movieInfo = currentLine.split("; ");
+                for(int i = 0; i < movieInfo.length; i++){
+                    System.out.println(movieInfo[i]);
+                }
+                    info.add(movieInfo);
+                    currentLine =reader.readLine();
+                }
+
+
+                return info;
+
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    public static ArrayList<String[]> mySavedMovies()
+    {
+        //for testing
+        String file = "C:/Users/csten/OneDrive/Datamatikker/savedMedia.txt";
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            ArrayList<String[]> info = new ArrayList<>();
+            String[] movieInfo = new String[4];
+
+            String currentLine = reader.readLine();
+            while (currentLine != null) {
+                movieInfo = currentLine.split("; ");
+                for(int i = 0; i < movieInfo.length; i++){
+                    System.out.println(movieInfo[i]);
+                }
+                info.add(movieInfo);
+                currentLine =reader.readLine();
+            }
+
+
+            return info;
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+
+    }
+    }
 
 
 

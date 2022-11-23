@@ -5,6 +5,13 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 import static java.nio.file.StandardOpenOption.APPEND;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
+import static java.nio.file.StandardOpenOption.APPEND;
 
 public class CreateUserAccount {
     static Scanner s = new Scanner(System.in);

@@ -24,7 +24,8 @@ public class TextUI {
         }
         else if (choice.equals("2"))
         {
-          user  = UserLogin.Userlogin();
+            user  = UserLogin.Userlogin();
+            System.out.println(user);
         }
         else {
             System.out.println("Invalid choice!");
@@ -32,16 +33,15 @@ public class TextUI {
             String proc = s.nextLine();
 
         }
-return user;
+        return user;
     }
 
 
-    public static void playOrSaveMedia(User currentUser)
-    {
+    public static void playOrSaveMedia() throws IOException {
         int choise = 0;
 
 
-        System.out.println("What would you like to do? 1 : Play, 2 : Save, 3 : Return to Mainmenu");
+        System.out.println("What would you like to do? 1 : Play, 2 : Save, 3 : Return to Main menu");
         try {
             choise = Integer.parseInt(FileIO.getInput());
         } catch (Exception e) {
@@ -51,6 +51,15 @@ return user;
         switch(choise)
         {
             case 1:
+                FileIO.playMovie();
+
+            case 2:
+                FileIO.saveMovie();
+                mainMenu();
+            case 3:
+                mainMenu();
+
+
 
 
 
@@ -61,7 +70,7 @@ return user;
 
 
 
-    public static void mainMenu(User currentUser) {
+    public static void mainMenu() {
 
 
         //readInfo();
@@ -120,5 +129,9 @@ return user;
 
     }
 
+    public static void main(String[] args) throws IOException {
+        startMenu();
+
+    }
 
 }
