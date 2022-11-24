@@ -41,7 +41,7 @@ public class TextUI {
         int choise = 0;
 
 
-        System.out.println("What would you like to do? 1 : Play, 2 : Save, 3 : Return to Main menu");
+        System.out.println("What would you like to do? 1 : Play, 2 : Save, 3 : Remove from saved list, 4 : Return to Main menu");
         try {
             choise = Integer.parseInt(FileIO.getInput());
         } catch (Exception e) {
@@ -52,12 +52,20 @@ public class TextUI {
         {
             case 1:
                 FileIO.playMovie();
-
+break;
             case 2:
                 FileIO.saveMovie();
                 mainMenu();
+                break;
             case 3:
+                FileIO.removeFromSaved();
                 mainMenu();
+                break;
+
+
+                case 4:
+                mainMenu();
+                break;
 
 
 
@@ -77,7 +85,7 @@ public class TextUI {
         int choise = 0;
 
 
-        System.out.println("What would you like to search for? 1 : Read all info, 2 : Title, 3 : Category");
+        System.out.println("What would you like to search for? 1 : Read all info, 2 : Title, 3 : Category, 4 : Watched movies list, 5: Saved movies list");
         try {
             choise = Integer.parseInt(FileIO.getInput());
         } catch (Exception e) {
@@ -118,9 +126,18 @@ public class TextUI {
 
 
 
+
+
                     }
                 }
                 break;
+            case 4:
+                FileIO.myWatchedMovies();
+                break;
+            case 5:
+                FileIO.mySavedMovies();
+                break;
+
             default:
                 System.out.println("What a stupid thing to type");
                 break;
